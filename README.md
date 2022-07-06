@@ -6,7 +6,7 @@ We present the Mouse Kidney Atlas (MKA), a comprehensive atlas of cellular heter
 
 The MKA is publicly available to download, visualize and interact with at [cellxgene](https://cellxgene.cziscience.com/collections/92fde064-2fb4-41f8-b85c-c6904000b859)
 
-For more details refer to: [ A comprehensive mouse kidney atlas enables rare cell population characterization and robust marker discovery]([https://www.google.com](https://www.biorxiv.org/content/10.1101/2022.07.02.498501v1))
+For more details refer to: [ A comprehensive mouse kidney atlas enables rare cell population characterization and robust marker discovery]([https://www.biorxiv.org/content/10.1101/2022.07.02.498501v1])
 
 ## File descriptions
 - **models**: Files containing the trained models used in the manuscript
