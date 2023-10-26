@@ -21,9 +21,24 @@ For more details refer to: [ A comprehensive mouse kidney atlas enables rare cel
      - <u>Downstream_analyses </u>: Figure 5
 
         Supplementary Figure 6
+- **adata.h5ad** adata object with the correct metadata and features to directly load the trained models
 - **functions.py** helper functions used across the code
 - **hyper_tune.py** [Ray tune](https://docs.ray.io/en/latest/tune/index.html) implementation to optimize scVI model hyperparameters
 
+# Using the trained models
+
+If you want to use the models for your own research you will need the HVG-filtered matrix we trained these on. <ins>After cloning the repository</ins> you can do the following:
+
+
+``` python
+import os
+import scvi
+import scanpy as sc
+
+os.chdir("MKA")
+adata = sc.read_h5ad("adata.h5ad")
+atlas_model = scvi.model.SCANVI.load("models/scANVI_model_full", adata=adata)
+```
 # Hyperparameter Optimization
 
 [Ray tune](https://docs.ray.io/en/latest/tune/index.html) was used train 1000 different hyperparameter and model configurations. 
@@ -61,3 +76,4 @@ The following table contains all studies included in the MKA
 | [Conway et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32978267/)    | Conway20      | [GSE140023](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE140023)   |
 | [Hinze et al., 2021](https://pubmed.ncbi.nlm.nih.gov/33239393/)     | Hinze21       | [GSE145690](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE145690)   |
 | [Janosevic et al., 2021](https://pubmed.ncbi.nlm.nih.gov/33448928/) | Janosevic21   | [GSE151658](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE151658)   |
+
