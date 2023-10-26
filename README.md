@@ -22,6 +22,11 @@ For more details refer to: [ A comprehensive mouse kidney atlas enables rare cel
 
         Supplementary Figure 6
 - **adata.h5ad** adata object with the correct metadata and features to directly load the trained models
+    - **Observation (obs) Columns Description**:
+
+            - `Celltype_finest`: Original cell types after manual curatiom.
+            - `Celltype_finest_lowres`: Lower resolution cell types used to train scANVI.
+            - `Celltype`: Final cell types, after scHPL and manual curation
 - **functions.py** helper functions used across the code
 - **hyper_tune.py** [Ray tune](https://docs.ray.io/en/latest/tune/index.html) implementation to optimize scVI model hyperparameters
 
