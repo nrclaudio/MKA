@@ -32,7 +32,7 @@ For more details refer to: [ A comprehensive mouse kidney atlas enables rare cel
 
 # Using the trained models
 
-If you want to use the models for your own research you will need the HVG-filtered matrix we trained these on. <ins>After cloning the repository</ins> you can do the following:
+If you want to use the models for your own research you will need the HVG-filtered matrix we trained these on. You can find the AnnData object at [Zenodo](https://zenodo.org/records/10159136). Once downloaded, you can:
 
 
 ``` python
