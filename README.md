@@ -21,12 +21,10 @@ For more details refer to: [ A comprehensive mouse kidney atlas enables rare cel
      - <u>Downstream_analyses </u>: Figure 5
 
         Supplementary Figure 6
-- **adata.h5ad** adata object with the correct metadata and features to directly load the trained models
-    - **Observation (obs) Columns Description**:
+- **MKA_Metamarkers.xlsx** Excel file with the identified metamarkers for each cell type label in the MKA.
+    - **Rank**: Overall ranking for this gene within a cell type. The higher the ranking the better the marker is for the given population accounting for batch differences and number of datasets in which the gene is detected. 
+    - **AUROC**: Area under the receiver-operator curve. This value is an indication of how good the gene is in a classification scenario. For example, Podxl has an AUROC value of 0.9, which means that this gene is very good at classifying Podocytes as such.
 
-            - `Celltype_finest`: Original cell types after manual curatiom.
-            - `Celltype_finest_lowres`: Lower resolution cell types used to train scANVI.
-            - `Celltype`: Final cell types, after scHPL and manual curation
 - **functions.py** helper functions used across the code
 - **hyper_tune.py** [Ray tune](https://docs.ray.io/en/latest/tune/index.html) implementation to optimize scVI model hyperparameters
 
