@@ -1,4 +1,4 @@
-# Mouse Kidney Atlas
+# Mouse Kidney Atlas and Extended Mouse Kidney Atlas
 
 ![workflow](Figure1-workflow.png)
 
@@ -8,9 +8,23 @@ The MKA is publicly available to download, visualize and interact with at [cellx
 
 For more details refer to: [ A comprehensive mouse kidney atlas enables rare cell population characterization and robust marker discovery](https://www.biorxiv.org/content/10.1101/2022.07.02.498501v1)
 
+## Data availability
+
+Two annotated `AnnData` objects are available in the [`data/`](data) folder of this repository:
+
+| File | Description | Reference |
+|------|--------------|------------|
+| **`data/mka.h5ad`** | Baseline Mouse Kidney Atlas used in [Novella-Rausell *et al.*, *iScience*, 2023](https://www.cell.com/iscience/fulltext/S2589-0042(23)00954-9). Contains 141,401 cell/nuclei × 3,000 genes integrated across eight studies. | *iScience*, 2023 |
+| **`data/mka_extended_cleaned.h5ad`** | Extended version used in [Yasinoglu *et al.*, *JASN*, 2025](https://journals.lww.com/jasn/abstract/9900/spatial_transcriptomics_reveals_injured_cells,.803.aspx). Contains 303,791 cells/nuclei × 12,156 genes. Enriched with immune, injury-induced, and PKD-specific populations, used for Tangram-based deconvolution of spatial data. Cleaned version with redundant QC and modality columns removed. | *JASN*, 2025 |
+
+Both datasets are also archived on [Zenodo](https://zenodo.org/records/10159136) for citation and long-term preservation.
+
 ## File descriptions
-- **models**: Files containing the trained models used in the manuscript
-- **notebooks**: notebooks used to generate the figures presented in the manuscript
+- **data/** — Contains the main `AnnData` reference atlases:  
+  - `mka.h5ad` (baseline atlas)  
+  - `mka_extended_cleaned.h5ad` (extended atlas for PKD study)
+- **models**: Files containing the trained models used in both manuscripts
+- **notebooks**: notebooks used to generate the figures presented in [Novella-Rausell *et al.*, *iScience*, 2023]
      - <u>QC_scVI_scANVI </u>: Figure 1
      - <u>scHPL_ManualReannotation </u>: Figure 2 and 3
 
@@ -21,28 +35,36 @@ For more details refer to: [ A comprehensive mouse kidney atlas enables rare cel
      - <u>Downstream_analyses </u>: Figure 5
 
         Supplementary Figure 6
-- **MKA_Metamarkers.xlsx** Excel file with the identified metamarkers for each cell type label in the MKA.
+- **MKA_Metamarkers.xlsx** Excel file with the identified metamarkers for each cell type label in the MKA ([Novella-Rausell *et al.*, *iScience*, 2023]).
     - **Rank**: Overall ranking for this gene within a cell type. The higher the ranking the better the marker is for the given population accounting for batch differences and number of datasets in which the gene is detected. 
     - **AUROC**: Area under the receiver-operator curve. This value is an indication of how good the gene is in a classification scenario. For example, Podxl has an AUROC value of 0.9, which means that this gene is very good at classifying Podocytes as such.
 
 - **functions.py** helper functions used across the code
 - **hyper_tune.py** [Ray tune](https://docs.ray.io/en/latest/tune/index.html) implementation to optimize scVI model hyperparameters
 
-# Using the trained models
+## Using the trained models
 
-If you want to use the models for your own research you will need the HVG-filtered matrix we trained these on. You can find the AnnData object at [Zenodo](https://zenodo.org/records/10159136). Once downloaded, you can:
-
+To use the trained models or load the atlases for your own analyses:
 
 ``` python
 import os
 import scvi
 import scanpy as sc
 
+# Change directory to the repo root
 os.chdir("MKA")
-adata = sc.read_h5ad("adata.h5ad")
+
+# Load the baseline atlas
+adata = sc.read_h5ad("data/mka.h5ad")
+
+# Load model trained on this atlas
 atlas_model = scvi.model.SCANVI.load("models/scANVI_model_full", adata=adata)
+
+# Or, to load the extended version
+adata_ext = sc.read_h5ad("data/mka_extended_cleaned.h5ad")
 ```
-# Hyperparameter Optimization
+
+## Hyperparameter Optimization
 
 [Ray tune](https://docs.ray.io/en/latest/tune/index.html) was used train 1000 different hyperparameter and model configurations. 
 
@@ -65,7 +87,7 @@ The search space was defined as follows:
     > 'Source' in this case refers to either nuclei or cell as the starting material
 - number of epochs: random number between ``100`` and ``201``
 
-# Datasets
+## Datasets
 
 The following table contains all studies included in the MKA
 
@@ -80,3 +102,18 @@ The following table contains all studies included in the MKA
 | [Hinze et al., 2021](https://pubmed.ncbi.nlm.nih.gov/33239393/)     | Hinze21       | [GSE145690](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE145690)   |
 | [Janosevic et al., 2021](https://pubmed.ncbi.nlm.nih.gov/33448928/) | Janosevic21   | [GSE151658](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE151658)   |
 
+## Citation
+
+If you use these datasets, please cite:
+
+> **Novella-Rausell, C.**, Grudniewska, M., Peters, D.J.M., Mahfouz, A.  
+> *A comprehensive mouse kidney atlas enables rare cell population characterization and robust marker discovery.*  
+> *iScience*, 26(6): 106877 (2023).  
+> DOI: [10.1016/j.isci.2023.106877](https://doi.org/10.1016/j.isci.2023.106877)
+
+In addition, if you use the extended version, please also cite:
+
+> **Yasinoglu, S.A.** and **Novella-Rausell, C.**, *et al.*  
+> *Spatial Transcriptomics Reveals Injured Cells, Signature Genes, and Communication Patterns in the Cyst Microenvironment of Polycystic Kidney Disease.*  
+> *Journal of the American Society of Nephrology*, 2025.  
+> DOI: [10.1681/ASN.0000000894](https://doi.org/10.1681/ASN.0000000894)
