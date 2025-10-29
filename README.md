@@ -17,7 +17,7 @@ Two annotated `AnnData` objects are available in the [`data/`](data) folder of t
 | File | Description | Reference |
 |------|--------------|------------|
 |[**mka.h5ad**](https://zenodo.org/records/17395591/files/mka.h5ad?download=1) | Baseline Mouse Kidney Atlas used in [Novella-Rausell *et al.*, *iScience*, 2023](https://www.cell.com/iscience/fulltext/S2589-0042(23)00954-9). Contains 141,401 cell/nuclei × 3,000 genes integrated across eight studies. | *iScience*, 2023 |
-| [**mka_extended_cleaned.h5ad**](https://zenodo.org/records/17395591/files/mka_extended.h5ad?download=1) | Extended version used in [Yasinoglu *et al.*, *JASN*, 2025](https://journals.lww.com/jasn/abstract/9900/spatial_transcriptomics_reveals_injured_cells,.803.aspx). Contains 303,791 cells/nuclei × 12,156 genes. Enriched with immune, injury-induced, and PKD-specific populations, used for Tangram-based deconvolution of spatial data. Cleaned version with redundant QC and modality columns removed. | *JASN*, 2025 |
+| [**mka_extended.h5ad**](https://zenodo.org/records/17395591/files/mka_extended.h5ad?download=1) | Extended version used in [Yasinoglu *et al.*, *JASN*, 2025](https://journals.lww.com/jasn/abstract/9900/spatial_transcriptomics_reveals_injured_cells,.803.aspx). Contains 303,791 cells/nuclei × 12,156 genes. Enriched with immune, injury-induced, and PKD-specific populations, used for Tangram-based deconvolution of spatial data. Cleaned version with redundant QC and modality columns removed. | *JASN*, 2025 |
 
 Both datasets are also archived on [Zenodo](https://zenodo.org/records/10159136) for citation and long-term preservation.
 
